@@ -30,3 +30,14 @@ this
 - Karttunen
 - Lambert
 - Burness
+
+== Ewan said
+
+- Jason Riggle
+- Jason Eisan
+- Bruce Tesser _Output-Driven Phonology_
+- Model theoretic phonology
+  - See Heinz ESSLI course
+
+- What are the model-theoretic statements of opacity from the recent Bakovic
+  and Blumenfeld paper?
