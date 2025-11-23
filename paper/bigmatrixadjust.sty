@@ -1,0 +1,11 @@
+\newenvironment{setmatrix*}[1][c]
+    {\renewcommand{\arraystretch}{0.6}
+        \left\{%
+        \begin{matrix*}[#1]}
+    {\end{matrix*}\right\}}
+
+\newenvironment{featmatrix*}[1][c]
+    {\renewcommand{\arraystretch}{0.6}
+        \left[%
+        \begin{matrix*}[#1]}
+    {\end{matrix*}\right]}

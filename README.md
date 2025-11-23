@@ -8,17 +8,8 @@ University of Toronto, and taught by Dr. Peter Jurgec.
 
 ## Research topic
 
-Can we describe opacity, theoretically, with FSTs? What insights can we gain
-when we do? This project is on the intersection between opacity and finite state
-transducers. Finite state transducers have been used a lot in the literature to
-formally describe both rule-based and OT phonology, but have been related to
-opacity almost nowhere. My first step is to familiarize myself with all of the
-available literature and answer as many of the questions as I can from my post
-here https://piazza.com/class/mepxps5egjp5c3/post/17. If I can answer all of
-them, that's probably worth a final paper in itself, but more likely I'll find
-something really interesting in the process.
-
-Please see `notes.typ` for the beginning of a literature review.
+Chumash opacity leads generalizations about phonotactics in languages with
+similar opacity, argued using Multi-tiered strictly local languages.
 
 ## Typst
 

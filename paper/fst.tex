@@ -1,0 +1,173 @@
+% This is a partial FST that I was considering for the paper. Unsure if I'm
+% going to need to actually draw an FST for the paper anymore at the time of
+% writing
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    [
+      initial/.style={line width=1pt},
+      accepting by double/.append style={line width=1pt},
+      semithick,
+      node distance=2cm,
+    ]
+    \node (init) [initial] {};
+    \node (empty) [state, right=of init] {$\lambda$};
+    \node (eow) [state, right=of empty] {$\ltimes$};
+    \node (s) [state, below right=of eow] {\textipa{s}};
+    \node (S) [state, above right=of eow] {\textipa{S}};
+    \node (mb) [state, right=of s] {$+$};
+    \node (t) [state, right=of S] {\textipa{t}};
+    \path [-{Stealth[]}]
+        (init) edge node {} (empty)
+        (empty) edge node [above] {$\lambda:\lambda$} (eow)
+        (eow) edge [bend right=90, looseness=2] node [below left]
+                {$+:+$} (mb)
+            edge node [below left] {\textipa{s}$:$\textipa{s}} (s)
+            edge node [above left] {\textipa{S}$:$\textipa{S}} (S)
+            edge [bend left=90, looseness=2] node [above left]
+                {\textipa{t}$:$\textipa{t}} (t)
+        (s) edge [loop left] node {\textipa{s}$:$\textipa{s}} ()
+            edge [loop below] node {\textipa{S}$:$\textipa{s}} ()
+            edge [bend left=5] node [above left]
+                {\textipa{t}$:$\textipa{t}} (t)
+        (S) edge [loop left] node {\textipa{S}$:$\textipa{S}} ()
+            edge [loop above] node {\textipa{s}$:$\textipa{S}} ()
+            edge node {} (t)
+        (mb) edge [loop right] node {} ()
+            edge [bend left=5] node [below right]
+                {\textipa{s}$:$\textipa{s}} (t)
+            edge node {} (s)
+        (t) edge [loop right] node {} ()
+            edge [bend left=5] node [below right]
+                {\textipa{s}$:$\textipa{s}} (s)
+            edge [bend left=5] node [below right]
+                {\textipa{s}$:$\textipa{s}} (mb)
+            edge [loop right] node {} ()
+
+        ;
+  \end{tikzpicture}
+\end{figure}
+
+% TODO: These FSTs are missing edges from SOW to EOW
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    [
+      initial/.style={line width=1pt},
+      accepting by double/.append style={line width=1pt},
+      semithick,
+      node distance=1cm,
+    ]
+    \node (init) [initial] {};
+    \node (empty) [state, right=of init] {$\lambda$};
+    \node (sow) [state, right=of empty] {$\rtimes$};
+    \node (spacing0) [right=of sow] {};
+    \node (spacing1) [right=of spacing0] {};
+    \node (spacing2) [right=of spacing1] {};
+    \node (E) [state, above=of spacing1] {$E$};
+    \node (EC) [state, below=of spacing1] {$E^\complement$};
+    \node (eow) [state, accepting, right=of spacing2] {$\ltimes$};
+    \path [-{Stealth[]}]
+        (init) edge node {} (empty)
+        (empty) edge node [above] {$\lambda:\lambda$} (sow)
+        (sow) edge node [below left] {$\rtimes:\rtimes$} (EC)
+        (E) edge [loop above] node {$E:E$} ()
+            edge [bend left=10] node [right, align=center] {$S:T$\\$T:T$}
+                (EC)
+            edge [above right] node {$\ltimes:\ltimes$} (eow)
+            (EC) edge [loop below] node [align=center] {$S:S$\\$T:T$} ()
+            edge [bend left=10] node [left] {$E:E$} (E)
+            edge [below right] node {$\ltimes:\ltimes$} (eow)
+        ;
+  \end{tikzpicture}
+  \caption{
+      FST of the TSL process $\mathbb{A}$, on tier $\Theta \cup \{E\}$.
+  }
+  \label{fst:A}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    [
+      initial/.style={line width=1pt},
+      accepting by double/.append style={line width=1pt},
+      semithick,
+      node distance=1cm,
+    ]
+    \node (init) [initial] {};
+    \node (empty) [state, right=of init] {$\lambda$};
+    \node (sow) [state, right=of empty] {$\rtimes$};
+    \node (spacing0) [right=of sow] {};
+    \node (spacing1) [right=of spacing0] {};
+    \node (spacing2) [right=of spacing1] {};
+    \node (S) [state, above=of spacing1] {$S$};
+    \node (T) [state, below=of spacing1] {$T$};
+    \node (eow) [state, accepting, right=of spacing2] {$\ltimes$};
+    \path [-{Stealth[]}]
+        (init) edge node {} (empty)
+        (empty) edge node [above] {$\lambda:\lambda$} (sow)
+        (sow) edge node [above left] {$\rtimes S:\rtimes S$} (S)
+              edge node [below left] {$\rtimes T:\rtimes T$} (T)
+        (S) edge [loop above] node {$T:S$} ()
+            edge [above right] node {$\ltimes:\ltimes$} (eow)
+        (T) edge [loop below] node {$T:T$} ()
+            edge [left] node {$S:S$} (S)
+            edge [below right] node {$\ltimes:\ltimes$} (eow)
+        ;
+  \end{tikzpicture}
+  \caption{FST of the TSL process $\mathbb{B}$ on tier $\Theta$.}
+  \label{fst:B}
+\end{figure}
+
+% TODO: this FST is not technically TSL, but it can be reduced to a TSL FST.
+%       so, reduce it
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    [
+      initial/.style={line width=1pt},
+      accepting by double/.append style={line width=1pt},
+      semithick,
+      node distance=1cm,
+    ]
+    \node (init) [initial] {};
+    \node (empty) [state, right=of init] {$\lambda$};
+    \node (sow) [state, right=of empty] {$\rtimes$};
+    \node (EC) [state, right=of sow] {$E^\complement$};
+    \node (spacingl) [right=of EC] {};
+    \node (T) [state, right=of spacingl] {$T$};
+    \node (spacingu) [above=of T] {};
+    \node (spacingd) [below=of T] {};
+    \node (spacingr) [right=of T] {};
+    \node (S) [state, above=of spacingu] {$S$};
+    \node (E) [state, below=of spacingd] {$E$};
+    \node (eow) [state, accepting, right=of spacingr] {$\ltimes$};
+    \path [-{Stealth[]}]
+        (init) edge node {} (empty)
+        (empty) edge node [above] {$\lambda:\lambda$} (sow)
+        (sow) edge node [above] {$\rtimes:\rtimes$} (EC)
+        (EC) edge node [above left] {$S:S$} (S)
+            edge node [above] {$T:T$} (T)
+            edge node [below left] {$E:E$} (E)
+        (S) edge [loop left] node [align=center] {$S:S$\\$T:S$\\$E:E$} ()
+            edge [above right] node {$\ltimes:\ltimes$} (eow)
+        (T) edge node [left] {$S:S$} (S)
+            edge [in=30, out=60, looseness=10] node [above] {$T:T$} (T)
+            edge [bend left=10] node [right] {$E:E$} (E)
+            edge [above] node {$\ltimes:\ltimes$} (eow)
+        (E) edge [bend left=10] node [left,align=center] {$S:T$\\$T:T$}
+                (T)
+            edge [loop left] node {$E:E$} ()
+            edge [above] node [below right] {$\ltimes:\ltimes$} (eow)
+        ;
+  \end{tikzpicture}
+  \caption{
+      FST of the TSL process $\mathbb{B} \circ \mathbb{A}$ on tier
+      $\Theta \cup \{E\}$.
+    }
+  \label{fst:BA}
+\end{figure}
